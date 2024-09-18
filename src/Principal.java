@@ -4,13 +4,20 @@ public class Principal {
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Digite o limite de compras: ");
-        String input = scanner.next();
+        float limite = 0;
+        while (true) {
+            System.out.println("Digite o limite de compras (ou 'S' para Sair): ");
+            String input = scanner.next();
+            if (input.equalsIgnoreCase("S")) {
+                return;
+            }
 
-        float limite = validarValor(input);
-        if (limite < 0) {
-            System.out.println("Limite inválido! Por favor, digite um número maior ou igual a 0.");
-            return;
+            limite = validarValor(input);
+            if (limite < 0) {
+                System.out.println("Limite inválido! Use apenas caracteres numéricos.");
+            } else {
+                break;
+            }
         }
         CartaoDeCredito cartaoDeCredito = new CartaoDeCredito(limite);
         fazerCompras(scanner, cartaoDeCredito);
